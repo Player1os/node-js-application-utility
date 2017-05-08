@@ -27,7 +27,7 @@ if (configSchema) {
 		}
 
 		// Parse entry values based on data type.
-		switch (configSchema[key]) {
+		switch (parsedConfigSchema[key]) {
 			case 'Boolean':
 				config[key] = config[key] === 'TRUE'
 				break;
