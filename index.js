@@ -2,6 +2,9 @@
 const dotenv = require('dotenv')
 const findConfig = require('find-config')
 
+// Load node modules.
+const path = require('path')
+
 // Populate unassigned process env keys with values defined in the .env file.
 dotenv.config()
 
@@ -47,7 +50,7 @@ if (configSchema) {
 
 // Load the project's package file.
 config.package = findConfig.require('package.json', {
-	cwd: '..',
+	cwd: path.resolve(__dirname, '..'),
 })
 
 // Add common configuration entries to the config object.
