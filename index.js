@@ -27,7 +27,7 @@ if (configSchema) {
 		}
 
 		// Parse entry values based on data type.
-		switch (defaultConfig[key]) {
+		switch (configSchema[key]) {
 			case 'Boolean':
 				config[key] = config[key] === 'TRUE'
 				break;
@@ -43,7 +43,7 @@ if (configSchema) {
 				config[key] = JSON.parse(config[key])
 				break;
 			default:
-				throw new Error(`Unknown configuration entry data type '${defaultConfig[key]}' at key '${key}'`)
+				throw new Error(`Unknown configuration entry data type '${configSchema[key]}' at key '${key}'`)
 		}
 	});
 }
