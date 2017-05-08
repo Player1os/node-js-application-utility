@@ -1,6 +1,6 @@
 {
   "name": "@player1os/config",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A small library that reads and parses configuration files using dotenv",
   "main": "index.js",
   "scripts": {
