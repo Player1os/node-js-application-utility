@@ -1,0 +1,27 @@
+{
+  "name": "@player1os/config",
+  "version": "1.0.0",
+  "description": "A small library that reads and parses configuration files using dotenv",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Player1os/node-js-config.git"
+  },
+  "keywords": [
+    "dotenv",
+    "config"
+  ],
+  "author": "Osama Hassanein <player1os@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Player1os/node-js-config/issues"
+  },
+  "homepage": "https://github.com/Player1os/node-js-config#readme",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "find-config": "^1.0.0"
+  }
+}
