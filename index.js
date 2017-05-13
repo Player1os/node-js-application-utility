@@ -1,12 +1,22 @@
 // Load npm modules.
-const dotenv = require('dotenv')
-const findConfig = require('find-config')
+import dotenv from 'dotenv'
+import findConfig from 'find-config'
 
 // Load node modules.
-const path = require('path')
+import path from 'path'
+
+// Load the project's package file path.
+const packageFilePath = findConfig('package.json', {
+	cwd: path.resolve(__dirname, '..'),
+})
 
 // Populate unassigned process env keys with values defined in the .env file.
 dotenv.config()
+
+// Add common configuration entries to the process env variables.
+process.env.APP_ROOT_PATH = path.dirname(packageFilePath)
+process.env.APP_VERSION = require(packageFilePath).version
+process.env.APP_IS_PRODUCTION = process.env.NODE_ENV === 'production'
 
 // Load environment variables into a config object.
 const config = Object.assign({}, process.env)
@@ -30,6 +40,9 @@ if (configSchema) {
 		switch (parsedConfigSchema[key]) {
 			case 'Boolean':
 				config[key] = config[key] === 'TRUE'
+				if (config[key] !== 'FALSE') {
+					throw new Error('Boolean value must be TRUE or FALSE')
+				}
 				break;
 			case 'Integer':
 				config[key] = Number.parseInt(config[key], 10)
@@ -47,14 +60,6 @@ if (configSchema) {
 		}
 	});
 }
-
-// Load the project's package file.
-config.package = findConfig.require('package.json', {
-	cwd: path.resolve(__dirname, '..'),
-})
-
-// Add common configuration entries to the config object.
-config.APP_IS_PRODUCTION = config.NODE_ENV === 'production'
 
 // Export the config object.
 module.exports = config
