@@ -35,7 +35,7 @@ let configSchema = (findConfig.read('.env.schema', 'utf-8') || '')
 		'APP_IS_PRODUCTION=Boolean',
 		'APP_ROOT_PATH=String',
 		'APP_VERSION=String',
-	].join('/n')
+	].join('\n')
 
 // Parse the config schema.
 const parsedConfigSchema = dotenv.parse(configSchema)
@@ -50,10 +50,10 @@ Object.keys(parsedConfigSchema).forEach((key) => {
 	// Parse entry values based on data type.
 	switch (parsedConfigSchema[key]) {
 		case 'Boolean':
-			config[key] = config[key] === 'TRUE'
-			if (config[key] !== 'FALSE') {
+			if ((config[key] !== 'FALSE') && (config[key] !== 'TRUE')) {
 				throw new Error('Boolean value must be TRUE or FALSE')
 			}
+			config[key] = config[key] === 'TRUE'
 			break;
 		case 'Integer':
 			config[key] = Number.parseInt(config[key], 10)
