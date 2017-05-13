@@ -10,15 +10,19 @@ import path from 'path'
 const packageFilePath = findConfig('package.json', {
 	cwd: path.resolve(__dirname, '..'),
 })
-const parsedPackageFile = JSON.parse(fs.readFileSync(packageFilePath, 'utf-8'))
+const parsedPackageFile = packageFilePath
+	? JSON.parse(fs.readFileSync(packageFilePath, 'utf-8'))
+	: null
 
 // Populate unassigned process env keys with values defined in the .env file.
 dotenv.config()
 
 // Add common configuration entries to the process env variables.
-process.env.APP_ROOT_PATH = path.dirname(packageFilePath)
-process.env.APP_VERSION = parsedPackageFile.version
 process.env.APP_IS_PRODUCTION = process.env.NODE_ENV === 'production'
+process.env.APP_ROOT_PATH = path.dirname(packageFilePath)
+process.env.APP_VERSION = parsedPackageFile
+	? parsedPackageFile.version
+	: null
 
 // Load environment variables into a config object.
 const config = Object.assign({}, process.env)
