@@ -3,19 +3,21 @@ import dotenv from 'dotenv'
 import findConfig from 'find-config'
 
 // Load node modules.
+import fs from 'fs'
 import path from 'path'
 
 // Load the project's package file path.
 const packageFilePath = findConfig('package.json', {
 	cwd: path.resolve(__dirname, '..'),
 })
+const parsedPackageFile = JSON.parse(fs.readFileSync(packageFilePath, 'utf-8'))
 
 // Populate unassigned process env keys with values defined in the .env file.
 dotenv.config()
 
 // Add common configuration entries to the process env variables.
 process.env.APP_ROOT_PATH = path.dirname(packageFilePath)
-process.env.APP_VERSION = require(packageFilePath).version
+process.env.APP_VERSION = parsedPackageFile.version
 process.env.APP_IS_PRODUCTION = process.env.NODE_ENV === 'production'
 
 // Load environment variables into a config object.
@@ -62,4 +64,4 @@ if (configSchema) {
 }
 
 // Export the config object.
-module.exports = config
+export default config
