@@ -1,10 +1,10 @@
 // Load npm modules.
-import dotenv from 'dotenv'
+import * as dotenv from 'dotenv'
 import findConfig from 'find-config'
 
 // Load node modules.
-import fs from 'fs'
-import path from 'path'
+import * as fs from 'fs'
+import * as path from 'path'
 
 // Load the project's package file path.
 const packageFilePath = findConfig('package.json', {
@@ -27,10 +27,10 @@ process.env.APP_VERSION = parsedPackageFile
 	: null
 
 // Load environment variables into a config object.
-const config = Object.assign({}, process.env)
+const config: object = Object.assign({}, process.env)
 
 // Load required config parameters from env schema file.
-let configSchema = (findConfig.read('.env.schema', 'utf-8') || '')
+const configSchema = (findConfig.read('.env.schema', 'utf-8') || '')
 	+ [
 		'APP_IS_PRODUCTION=Boolean',
 		'APP_ROOT_PATH=String',
@@ -54,22 +54,22 @@ Object.keys(parsedConfigSchema).forEach((key) => {
 				throw new Error('Boolean value must be TRUE or FALSE')
 			}
 			config[key] = config[key] === 'TRUE'
-			break;
+			break
 		case 'Integer':
 			config[key] = Number.parseInt(config[key], 10)
-			break;
+			break
 		case 'Float':
 			config[key] = Number.parseFloat(config[key])
-			break;
+			break
 		case 'String':
-			break;
+			break
 		case 'JSON':
 			config[key] = JSON.parse(config[key])
-			break;
+			break
 		default:
 			throw new Error(`Unknown configuration entry data type '${configSchema[key]}' at key '${key}'`)
 	}
-});
+})
 
 // Export the config object.
 export default config
