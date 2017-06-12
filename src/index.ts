@@ -44,7 +44,7 @@ const parsedConfigSchema = dotenv.parse(configSchema)
 
 // Prepare a parsed config object.
 const parsedConfig: {
-	[key: string]: boolean | number | string | object,
+	[key: string]: any,
 } = {}
 
 // For each of the parsed configuration entries.
