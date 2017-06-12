@@ -8,7 +8,7 @@ import * as path from 'path'
 
 // Load the project's package file path.
 const packageFilePath = (findConfig as (fileName: string, options: { cwd: string }) => string)('package.json', {
-	cwd: path.resolve(__dirname, '..', '..'),
+	cwd: path.resolve(__dirname, '..'),
 })
 const parsedPackageFile = packageFilePath
 	? JSON.parse(fs.readFileSync(packageFilePath, 'utf-8'))
