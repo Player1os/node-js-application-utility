@@ -1,13 +1,13 @@
 // Load npm modules.
 import * as dotenv from 'dotenv'
-import findConfig from 'find-config'
+import * as findConfig from 'find-config'
 
 // Load node modules.
 import * as fs from 'fs'
 import * as path from 'path'
 
 // Load the project's package file path.
-const packageFilePath = findConfig('package.json', {
+const packageFilePath = (findConfig as (fileName: string, options: { cwd: string }) => string)('package.json', {
 	cwd: path.resolve(__dirname, '..', '..'),
 })
 const parsedPackageFile = packageFilePath
@@ -32,7 +32,7 @@ const config: {
 } = Object.assign({}, process.env)
 
 // Load required config parameters from env schema file.
-const configSchema = (findConfig.read('.env.schema', 'utf-8') || '')
+const configSchema = ((findConfig.read as (fileName: string, encoding: string) => string)('.env.schema', 'utf-8') || '')
 	+ [
 		'APP_IS_PRODUCTION=Boolean',
 		'APP_ROOT_PATH=String',
