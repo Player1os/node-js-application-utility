@@ -69,6 +69,7 @@ Object.keys(parsedConfigSchema).forEach((key) => {
 			parsedConfig[key] = Number.parseFloat(config[key])
 			break
 		case 'String':
+			parsedConfig[key] = config[key]
 			break
 		case 'JSON':
 			parsedConfig[key] = JSON.parse(config[key])
