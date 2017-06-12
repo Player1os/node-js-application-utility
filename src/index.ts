@@ -27,7 +27,9 @@ process.env.APP_VERSION = parsedPackageFile
 	: null
 
 // Load environment variables into a config object.
-const config: object = Object.assign({}, process.env)
+const config: {
+	[key: string]: string,
+} = Object.assign({}, process.env)
 
 // Load required config parameters from env schema file.
 const configSchema = (findConfig.read('.env.schema', 'utf-8') || '')
@@ -39,6 +41,11 @@ const configSchema = (findConfig.read('.env.schema', 'utf-8') || '')
 
 // Parse the config schema.
 const parsedConfigSchema = dotenv.parse(configSchema)
+
+// Prepare a parsed config object.
+const parsedConfig: {
+	[key: string]: boolean | number | string | object,
+} = {}
 
 // For each of the parsed configuration entries.
 Object.keys(parsedConfigSchema).forEach((key) => {
@@ -53,18 +60,18 @@ Object.keys(parsedConfigSchema).forEach((key) => {
 			if ((config[key] !== 'FALSE') && (config[key] !== 'TRUE')) {
 				throw new Error('Boolean value must be TRUE or FALSE')
 			}
-			config[key] = config[key] === 'TRUE'
+			parsedConfig[key] = config[key] === 'TRUE'
 			break
 		case 'Integer':
-			config[key] = Number.parseInt(config[key], 10)
+			parsedConfig[key] = Number.parseInt(config[key], 10)
 			break
 		case 'Float':
-			config[key] = Number.parseFloat(config[key])
+			parsedConfig[key] = Number.parseFloat(config[key])
 			break
 		case 'String':
 			break
 		case 'JSON':
-			config[key] = JSON.parse(config[key])
+			parsedConfig[key] = JSON.parse(config[key])
 			break
 		default:
 			throw new Error(`Unknown configuration entry data type '${configSchema[key]}' at key '${key}'`)
@@ -72,4 +79,4 @@ Object.keys(parsedConfigSchema).forEach((key) => {
 })
 
 // Export the config object.
-export default config
+export default parsedConfig
