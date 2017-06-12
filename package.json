@@ -42,6 +42,7 @@
     "find-config": "^1.0.0"
   },
   "devDependencies": {
+    "@player1os/bluebird-global": "^1.0.0",
     "@player1os/tslint-config": "^1.1.1",
     "@types/bluebird-global": "^3.5.2",
     "@types/chai": "^4.0.0",
