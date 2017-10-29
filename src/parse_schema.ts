@@ -1,6 +1,8 @@
 // Load app modules.
-import { EDataType } from '.../src/types/e_data_type.d'
-import { ISchema } from '.../src/types/i_schema.d'
+import {
+	EDataType,
+	ISchema,
+} from '.../src/types'
 
 export default (fileData: string, defaultSchema: ISchema = {}) => {
 	// Parse the lines of the file.

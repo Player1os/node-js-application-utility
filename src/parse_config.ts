@@ -1,7 +1,9 @@
 // Load app modules.
-import { EDataType } from '.../src/types/e_data_type.d'
-import { IConfig } from '.../src/types/i_config.d'
-import { ISchema } from '.../src/types/i_schema.d'
+import {
+	EDataType,
+	IConfig,
+	ISchema,
+} from '.../src/types'
 
 export default (schema: ISchema) => {
 	// Load environment variables into a config object.

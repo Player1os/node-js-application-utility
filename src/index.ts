@@ -1,7 +1,7 @@
 // Load app modules.
 import parseConfig from '.../src/parse_config'
 import parseSchema from '.../src/parse_schema'
-import { EDataType } from '.../src/types/e_data_type.d'
+import { EDataType } from '.../src/types'
 
 // Load npm modules.
 import * as dotenv from 'dotenv'
