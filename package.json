@@ -1,6 +1,6 @@
 {
   "name": "@player1os/config",
-  "version": "1.1.12",
+  "version": "1.2.0",
   "description": "A library that reads and parses env files using dotenv and prepopulates env variables in a standard way",
   "private": false,
   "main": "index.js",
