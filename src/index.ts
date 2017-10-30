@@ -40,7 +40,7 @@ if (typeof parsedPackageFile.version !== 'string') {
 process.env.APP_VERSION = parsedPackageFile.version
 
 // Load and parse the required config parameters from env schema file.
-const schema = parseSchema(fse.readFileSync(path.join(mainDirPath, '.env.ts'), 'utf-8'))
+const schema = parseSchema(fse.readFileSync(path.join(mainDirPath, '.env.schema.ts'), 'utf-8'))
 
 // Load and parse the config object.
 const config = parseConfig(schema)
