@@ -4,15 +4,15 @@ import {
 	ISchema,
 } from '.../src/types'
 
-export default (fileData: string, defaultSchema: ISchema = {}) => {
+export default (fileData: string) => {
 	// Parse the lines of the file.
 	const lines = fileData.split('\n')
 
 	// Initialize the resulting schema, prepopulated with the default schema.
-	const schema = Object.assign({}, defaultSchema)
+	const schema: ISchema = {}
 
 	// Verify the header of the schema file.
-	if (lines[0] !== 'declare const _env_: undefined | {') {
+	if (lines[0] !== 'declare const _env_: {') {
 		throw new Error('The ".env.ts" schema file is invalid at line 0.')
 	}
 
