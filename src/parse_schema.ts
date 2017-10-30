@@ -61,7 +61,7 @@ export default (fileData: string) => {
 				case 'string,':
 					type = EDataType.String
 					break
-				case 'string, // json':
+				case 'any, // json':
 					type = EDataType.JSON
 					break
 				default:
