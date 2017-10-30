@@ -10,11 +10,9 @@ import * as fse from 'fs-extra'
 // Load node modules.
 import * as path from 'path'
 
-// Npm module declarations.
-declare function findConfig(fileName: string, options: { cwd: string }): string | null
-
 // Load the project's package file path.
-const packageFilePath = findConfig('package.json', { cwd: path.resolve(__dirname, '..') })
+const packageFilePath = (findConfig as (fileName: string, options: { cwd: string }) => string | null)(
+	'package.json', { cwd: path.resolve(__dirname, '..') })
 if (packageFilePath === null) {
 	throw new Error('No "package.json" file could be found.')
 }
