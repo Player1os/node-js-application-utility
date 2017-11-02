@@ -1,7 +1,7 @@
 {
-  "name": "@player1os/config",
-  "version": "1.2.4",
-  "description": "A library that reads and parses env files using dotenv and prepopulates env variables in a standard way",
+  "name": "@player1os/node-utility",
+  "version": "1.0.0",
+  "description": "A library that contains multiple utilities for creating node applications",
   "private": false,
   "main": "index.js",
   "types": "types/index.d.ts",
@@ -10,34 +10,38 @@
     "npm": "~5.5.1"
   },
   "scripts": {
-    "preversion": "npm run validate && git checkout . && git checkout master && git pull",
+    "preversion": "git checkout . && git checkout master && git pull && npm run validate",
     "postversion": "git push && git push --tags && npm publish",
     "build": "webpack",
-    "build:watch": "npm run build -- --watch",
+    "build:watch": "chockidar webpack.config.ts -c \"npm run build -- --watch\" --initial --silent",
     "clean": "rm -rf index.js* && rm -rf types",
-    "execute": "ts-node -r @player1os/bluebird-global -r module-alias/register",
     "lint": "tslint {./,src/**/,test/**/}*.ts --project ./tsconfig.json",
     "lint:watch": "chokidar ./*.ts src/**/*.ts test/**/*.ts -c \"npm run lint\" --initial --silent",
-    "test": "npm run execute -- test/index.ts",
+    "test": "mocha **/*.test.ts",
     "test:coverage": "nyc npm test",
     "test:watch": "chokidar src/**/*.ts test/**/*.ts -c \"npm test\" --initial --silent",
     "validate": "npm run clean && npm run build && npm run lint && npm run build && npm test"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Player1os/node-js-config.git"
+    "url": "git+https://github.com/Player1os/node-js-node-utility.git"
   },
   "keywords": [
+    "async",
     "dotenv",
     "env",
-    "environment"
+    "environment",
+    "execute",
+    "graceful shutdown",
+    "node",
+    "typescript"
   ],
   "author": "Osama Hassanein <player1os@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Player1os/node-js-config/issues"
+    "url": "https://github.com/Player1os/node-js-node-utility/issues"
   },
-  "homepage": "https://github.com/Player1os/node-js-config#readme",
+  "homepage": "https://github.com/Player1os/node-js-node-utility#readme",
   "dependencies": {
     "dotenv": "^4.0.0",
     "find-config": "^1.0.0",
