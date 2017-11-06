@@ -17,7 +17,7 @@ export default (projectPathStartpoint: string, rawEnv: IRawEnv) => {
 	const projectPath = findProjectPath(projectPathStartpoint)
 
 	// Load and parse the required config parameters from env schema file.
-	const schema = parseEnvSchema(fse.readFileSync(path.join(projectPath, '.env.schema.ts'), 'utf-8'))
+	const schema = parseEnvSchema(fse.readFileSync(path.join(projectPath, 'src', '.env.ts'), 'utf-8'))
 
 	// Define the parsing result.
 	const parsedConfig: IEnv = {}
