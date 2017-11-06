@@ -3,10 +3,10 @@ import extractEnv from '.../src/extract_env'
 import extractRawEnv from '.../src/extract_raw_env'
 
 // Export the function that triggers the env extraction.
-export default () => {
+export default (projectPathStartpoint: string) => {
 	// Extract and parse the env variables.
-	const rawEnv = extractRawEnv()
-	const env = extractEnv(rawEnv)
+	const rawEnv = extractRawEnv(projectPathStartpoint)
+	const env = extractEnv(projectPathStartpoint, rawEnv)
 
 	// Store the extracted variables to the global namespace.
 	Object.assign(global, {

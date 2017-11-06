@@ -5,22 +5,18 @@ import * as findConfig from 'find-config'
 import * as path from 'path'
 
 // Define a storage variable.
-let projectPath: null | string = null
+const projectPathMap = new Map<string, string>()
 
 // Export the function that determines the absolute path to the project.
-export default () => {
+export default (projectPathStartpoint: string) => {
 	// Verify that the result cannot be retrieved from storage.
-	if (projectPath === null) {
+	if (!projectPathMap.has(projectPathStartpoint)) {
 		// Attempt to find the project's package file path.
-		const currentPackageConfigPath = findConfig('package.json', { cwd: __dirname })
-		if (currentPackageConfigPath === null) {
-			throw new Error("Cannot find the dotenv project's package configuration.")
-		}
-		const packageConfigPath = findConfig('package.json', { cwd: path.resolve(path.dirname(currentPackageConfigPath), '..') })
+		const packageConfigPath = findConfig('package.json', { cwd: path.resolve(path.dirname(projectPathStartpoint), '..', '..') })
 		if (packageConfigPath === null) {
 			throw new Error("Cannot find the project's package configuration.")
 		}
-		projectPath = path.dirname(packageConfigPath)
+		projectPathMap.set(projectPathStartpoint, path.dirname(packageConfigPath))
 	}
-	return projectPath
+	return projectPathMap.get(projectPathStartpoint) as string
 }
