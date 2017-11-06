@@ -1,19 +1,17 @@
 // Load app modules.
-import {
-	EDataType,
-	ISchema,
-} from '.../src/types'
+import { EDataType } from '.../src/type/data_type.e'
+import { IEnvSchema } from '.../src/type/env_schema.i'
 
 export default (fileData: string) => {
 	// Parse the lines of the file.
 	const lines = fileData.split('\n')
 
 	// Initialize the resulting schema, prepopulated with the default schema.
-	const schema: ISchema = {}
+	const schema: IEnvSchema = {}
 
 	// Verify the header of the schema file.
 	if (lines[0] !== 'declare const _env_: {') {
-		throw new Error('The ".env.ts" schema file is invalid at line 0.')
+		throw new Error('The env schema file is invalid at line 0.')
 	}
 
 	// Iterate through the file's lines.
@@ -72,7 +70,7 @@ export default (fileData: string) => {
 			schema[keyStr.trim()] = type
 		} catch (err) {
 			// Rethrow the error.
-			throw new Error(`The ".env.ts" schema file is invalid at line ${i}.`)
+			throw new Error(`The env schema file is invalid at line ${i}.`)
 		}
 	}
 
