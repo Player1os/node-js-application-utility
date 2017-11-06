@@ -24,13 +24,13 @@ export default (projectPathStartpoint: string) => {
 	if (!('NODE_ENV' in rawEnv) || (['production', 'development'].indexOf(rawEnv.NODE_ENV) === -1)) {
 		throw new Error('The NODE_ENV variable is not set.')
 	}
-	const isProducation = rawEnv.NODE_ENV !== 'developement'
+	const isProducation = rawEnv.NODE_ENV !== 'development'
 	rawEnv.APP_IS_PRODUCTION = isProducation
 		? 'TRUE'
 		: 'FALSE'
 	rawEnv.NODE_ENV = isProducation
 		? 'production'
-		: 'developement'
+		: 'development'
 
 	// Ensure that the version variable is set correctly.
 	const parsedPackageFile = fse.readJsonSync(path.join(projectPath, 'package.json'))
