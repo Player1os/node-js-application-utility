@@ -15,7 +15,7 @@ export default (projectPathStartpoint: string) => {
 	const projectPath = findProjectPath(projectPathStartpoint)
 
 	// Populate unassigned process env keys with values defined in the .env file.
-	const rawEnv: IRawEnv = dotenv.parse(path.join(projectPath, '.env'))
+	const rawEnv: IRawEnv = dotenv.parse(fse.readFileSync(path.join(projectPath, '.env'), 'utf-8'))
 
 	// Add common configuration entries to the process env variables.
 	rawEnv.APP_ROOT_PATH = projectPath
@@ -33,7 +33,7 @@ export default (projectPathStartpoint: string) => {
 		: 'developement'
 
 	// Ensure that the version variable is set correctly.
-	const parsedPackageFile = fse.readJsonSync(projectPath)
+	const parsedPackageFile = fse.readJsonSync(path.join(projectPath, 'package.json'))
 	if (typeof parsedPackageFile.version !== 'string') {
 		throw new Error("The version key is not set in the project's package configuration.")
 	}
