@@ -12,7 +12,11 @@ export default () => {
 	// Verify that the result cannot be retrieved from storage.
 	if (projectPath === null) {
 		// Attempt to find the project's package file path.
-		const packageConfigPath = findConfig('package.json', { cwd: path.resolve(__dirname, '..') })
+		const currentPackageConfigPath = findConfig('package.json', { cwd: __dirname })
+		if (currentPackageConfigPath === null) {
+			throw new Error("Cannot find the dotenv project's package configuration.")
+		}
+		const packageConfigPath = findConfig('package.json', { cwd: path.resolve(path.dirname(currentPackageConfigPath), '..') })
 		if (packageConfigPath === null) {
 			throw new Error("Cannot find the project's package configuration.")
 		}
