@@ -1,4 +1,4 @@
-// Load app modules.
+// Load local modules.
 import { EDataType } from '.../src/type/data_type.e'
 import { IEnvSchema } from '.../src/type/env_schema.i'
 
