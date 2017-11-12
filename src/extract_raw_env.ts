@@ -18,7 +18,7 @@ export default (projectPathStartpoint: string) => {
 	const rawEnv: IRawEnv = dotenv.parse(fse.readFileSync(path.join(projectPath, '.env'), 'utf-8'))
 
 	// Add common configuration entries to the process env variables.
-	rawEnv.APP_ROOT_PATH = projectPath
+	rawEnv.APP_ROOT_PATH = path.resolve(projectPath)
 
 	// Ensure that the node env variable is set correctly.
 	if (!('NODE_ENV' in rawEnv) || (['production', 'development'].indexOf(rawEnv.NODE_ENV) === -1)) {
