@@ -10,9 +10,9 @@ import * as fse from 'fs-extra'
 import * as path from 'path'
 
 // Extracts the raw env variables from multiple sources.
-export default (projectPathStartpoint: string) => {
+export default () => {
 	// Load the project's package file path.
-	const projectPath = findProjectPath(projectPathStartpoint)
+	const projectPath = findProjectPath()
 
 	// Populate unassigned process env keys with values defined in the .env file.
 	const rawEnv: IRawEnv = dotenv.parse(fse.readFileSync(path.join(projectPath, '.env'), 'utf-8'))

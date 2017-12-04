@@ -11,10 +11,10 @@ export {
 }
 
 // Export the function that triggers the env extraction.
-export default (projectPathStartpoint: string) => {
+export default () => {
 	// Extract and parse the env variables.
-	const rawEnv = extractRawEnv(projectPathStartpoint)
-	const env = extractEnv(projectPathStartpoint, rawEnv)
+	const rawEnv = extractRawEnv()
+	const env = extractEnv(rawEnv)
 
 	// Set the result.
 	return { env, rawEnv }

@@ -12,9 +12,9 @@ import * as fse from 'fs-extra'
 import * as path from 'path'
 
 // Extracts the env variables by parsing and validating the raw env variables.
-export default (projectPathStartpoint: string, rawEnv: IRawEnv) => {
+export default (rawEnv: IRawEnv) => {
 	// Load the project's package file path.
-	const projectPath = findProjectPath(projectPathStartpoint)
+	const projectPath = findProjectPath()
 
 	// Load and parse the required config parameters from env schema file.
 	const schema = parseEnvSchema(fse.readFileSync(path.join(projectPath, 'src', '.env.ts'), 'utf-8'))

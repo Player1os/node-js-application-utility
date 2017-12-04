@@ -1,5 +1,5 @@
 declare module 'find-config' {
-	function findConfig(filename: string, options: { cwd?: string }): null | string
+	function findConfig(filename: string): null | string
 
 	namespace findConfig {}
 
