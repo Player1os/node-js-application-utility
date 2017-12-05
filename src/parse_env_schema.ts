@@ -4,7 +4,7 @@ import { IEnvSchema } from '.../src/type/env_schema.i'
 
 export default (fileData: string) => {
 	// Parse the lines of the file.
-	const lines = fileData.split('\n')
+	const lines = fileData.replace(/\r/g, '').split('\n')
 
 	// Initialize the resulting schema, prepopulated with the default schema.
 	const schema: IEnvSchema = {}
