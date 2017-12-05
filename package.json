@@ -1,6 +1,6 @@
 {
   "name": "@player1os/dotenv",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "A package containing a parsing algorithm for dotenv files in a typescript environment",
   "private": false,
   "main": "dist/index.js",
